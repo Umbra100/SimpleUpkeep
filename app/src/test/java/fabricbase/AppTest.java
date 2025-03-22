@@ -6,8 +6,5 @@ package fabricbase;
 import umbra.simpleupkeep.Runner;
 
 class AppTest {
-    public void appHasAGreeting() {
-        @SuppressWarnings("unused")
-        Runner classUnderTest = new Runner();
-    }
+    public void appHasAGreeting() {}
 }

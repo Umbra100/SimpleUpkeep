@@ -5,37 +5,29 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.8/userguide/building_java_projects.html in the Gradle documentation.
  */
 
-val paper_version = "1.21.4"
-
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
-    maven {
-        name = "papermc"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
+   mavenCentral()
 }
 
 dependencies {
     // This dependency is used by the application.
     implementation(libs.guava)
-    compileOnly("io.papermc.paper:paper-api:${paper_version}-R0.1-SNAPSHOT")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(project.findProperty("java_version") as String)
     }
 }
 
 application {
-   mainClass = "umbra.paperbase.PluginMain"
+   mainClass = "umbra.simpleupkeep.Runner"
 }
 
 

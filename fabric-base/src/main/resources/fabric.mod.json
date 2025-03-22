@@ -1,0 +1,22 @@
+{
+	"schemaVersion": 1,
+	"id": "simpleupkeep",
+	"version": "1.0",
+	"name": "SimpleUpkeep",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Umbra100"
+	],
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"umbra.fabricbase.FabricMain"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

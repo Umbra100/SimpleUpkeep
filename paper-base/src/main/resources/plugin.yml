@@ -1,0 +1,7 @@
+name: SimpleUpkeep
+version: 1.0.0
+main: umbra.paperbase.PluginMain
+description: An example plugin
+author: Umbra100
+website: ''
+api-version: '1.21.4'

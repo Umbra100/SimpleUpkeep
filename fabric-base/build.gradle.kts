@@ -5,7 +5,10 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.8/userguide/building_java_projects.html in the Gradle documentation.
  */
 
-val paper_version = "1.21.4"
+// val yarn_mappings = "1.21.4+build.8"
+val api_version = (project.findProperty("fabric.api_version") as String) + "+" + (project.findProperty("minecraft.version") as String)
+val loader_version = project.findProperty("fabric.loader_version")
+val yarn_version = (project.findProperty("minecraft.version") as String) + "+" + (project.findProperty("fabric.yarn_version") as String)
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
@@ -14,17 +17,20 @@ plugins {
 
 repositories {
     // Use Maven Central for resolving dependencies.
-    mavenCentral()
     maven {
-        name = "papermc"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
+         name = "Fabric"
+         url = uri("https://maven.fabricmc.net/")
+   }
+   gradlePluginPortal()
+   mavenCentral()
 }
 
 dependencies {
     // This dependency is used by the application.
     implementation(libs.guava)
-    compileOnly("io.papermc.paper:paper-api:${paper_version}-R0.1-SNAPSHOT")
+    implementation("net.fabricmc:fabric-loader:$loader_version")
+    implementation("net.fabricmc.fabric-api:fabric-api:$api_version")
+    implementation("net.fabricmc:yarn:$yarn_version:v2")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -35,7 +41,7 @@ java {
 }
 
 application {
-   mainClass = "umbra.paperbase.PluginMain"
+   mainClass = "umbra.fabricbase.FabricMain"
 }
 
 

@@ -5,7 +5,7 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.8/userguide/building_java_projects.html in the Gradle documentation.
  */
 
-val paper_version = "1.21.4"
+val paper_version = project.findProperty("minecraft.version") as String
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
@@ -24,7 +24,7 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation(libs.guava)
-    compileOnly("io.papermc.paper:paper-api:${paper_version}-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:$paper_version-R0.1-SNAPSHOT")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

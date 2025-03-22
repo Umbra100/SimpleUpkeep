@@ -13,6 +13,7 @@ val yarn_version = (project.findProperty("minecraft.version") as String) + "+" +
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("java")
 }
 
 repositories {
@@ -36,7 +37,7 @@ dependencies {
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(project.findProperty("java_version") as String)
     }
 }
 

@@ -4,6 +4,7 @@
  * This generated file contains a sample Java application project to get you started.
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.8/userguide/building_java_projects.html in the Gradle documentation.
  */
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 // val yarn_mappings = "1.21.4+build.8"
 val api_version = (project.findProperty("fabric.api_version") as String) + "+" + (project.findProperty("minecraft.version") as String)
@@ -13,6 +14,7 @@ val yarn_version = (project.findProperty("minecraft.version") as String) + "+" +
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("com.github.johnrengelman.shadow") version "8.0.0"
     id("java")
 }
 
@@ -32,6 +34,8 @@ dependencies {
     implementation("net.fabricmc:fabric-loader:$loader_version")
     implementation("net.fabricmc.fabric-api:fabric-api:$api_version")
     implementation("net.fabricmc:yarn:$yarn_version:v2")
+
+    implementation(project(":app"))
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -43,6 +47,27 @@ java {
 
 application {
    mainClass = "umbra.fabricbase.FabricMain"
+}
+
+tasks {
+   named<ShadowJar>("shadowJar") {
+      dependencies {
+         exclude(dependency("net.fabricmc.fabric-api:fabric-api:.*"))
+         exclude(dependency("net.fabricmc:fabric-loader:.*"))
+         exclude(dependency("net.fabricmc:yarn:.*"))
+      }
+      archiveFileName.set("SimpleUpkeep.jar")
+      mergeServiceFiles()
+      manifest {
+         attributes(mapOf("Main-Class" to "umbra.fabricbase.FabricMain"))
+      }
+   }
+}
+
+tasks {
+   build {
+      dependsOn(shadowJar)
+   }
 }
 
 

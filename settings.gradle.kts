@@ -21,4 +21,4 @@ plugins {
 }
 
 rootProject.name = "SimpleUpkeep"
-include("paper-base", "fabric-base", "forge-base", "app")
+include("paper-base", "fabric-base", "app")

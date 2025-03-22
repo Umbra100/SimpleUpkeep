@@ -12,8 +12,8 @@ val paper_version = project.findProperty("minecraft.version") as String
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    id("java")
     id("com.github.johnrengelman.shadow") version "8.0.0"
+    id("java")
 }
 
 repositories {
